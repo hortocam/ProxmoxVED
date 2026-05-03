@@ -1,0 +1,44 @@
+{
+  "name": "PennyHelm",
+  "slug": "pennyhelm",
+  "categories": [
+    23
+  ],
+  "date_created": "2026-05-02",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "interface_port": 8081,
+  "documentation": "https://github.com/administrativetrick/pennyhelm#readme",
+  "website": "https://github.com/administrativetrick/pennyhelm",
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/pennyhelm.webp",
+  "description": "PennyHelm is an open-source personal finance tracker for managing income, bills, accounts, budgets, debts, and savings goals. Features net worth tracking, optional Plaid bank integration, and CSV/PDF exports. Data is stored locally in SQLite.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/pennyhelm.sh",
+      "config_path": "/opt/pennyhelm",
+      "resources": {
+        "cpu": 1,
+        "ram": 1024,
+        "hdd": 4,
+        "os": "Debian",
+        "version": "13"
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": [
+    {
+      "text": "On first access you will be prompted to load sample data or start fresh. Your data is stored at /opt/pennyhelm/data/finances.db.",
+      "type": "info"
+    },
+    {
+      "text": "Optional Plaid bank integration can be configured by setting PLAID_CLIENT_ID, PLAID_SECRET, and PLAID_ENV in the service environment.",
+      "type": "info"
+    }
+  ]
+}
