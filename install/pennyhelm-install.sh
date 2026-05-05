@@ -31,7 +31,6 @@ msg_ok "Installed Node Modules"
 
 read -r -p "${TAB3}Would you like to configure Plaid integration? <y/N> " prompt
 if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
-  msg_info "Configuring Plaid"
   if [[ -z "${var_plaid_client_id:-}" ]]; then
     read -r -p "${TAB3}Plaid Client ID: " var_plaid_client_id
   fi
@@ -50,6 +49,7 @@ if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
       *) var_plaid_env="sandbox" ;;
     esac
   fi
+  msg_info "Configuring Plaid"
   cat <<EOF >/opt/pennyhelm/.env
 PLAID_CLIENT_ID=${var_plaid_client_id}
 PLAID_SECRET=${var_plaid_secret}
