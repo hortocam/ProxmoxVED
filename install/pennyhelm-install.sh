@@ -29,6 +29,35 @@ $STD npm install --omit=dev
 mkdir -p /opt/pennyhelm/data
 msg_ok "Installed Node Modules"
 
+read -r -p "${TAB3}Would you like to configure Plaid integration? <y/N> " prompt
+if [[ ${prompt,,} =~ ^(y|yes)$ ]]; then
+  msg_info "Configuring Plaid"
+  if [[ -z "${var_plaid_client_id:-}" ]]; then
+    read -r -p "${TAB3}Plaid Client ID: " var_plaid_client_id
+  fi
+  if [[ -z "${var_plaid_secret:-}" ]]; then
+    read -r -p "${TAB3}Plaid Secret: " var_plaid_secret
+  fi
+  if [[ -z "${var_plaid_env:-}" ]]; then
+    echo -e "${TAB3}Plaid Environment:"
+    echo -e "${TAB3}  1) sandbox"
+    echo -e "${TAB3}  2) development"
+    echo -e "${TAB3}  3) production"
+    read -r -p "${TAB3}Select environment [1-3] (default: 1): " plaid_env_choice
+    case "${plaid_env_choice}" in
+      2) var_plaid_env="development" ;;
+      3) var_plaid_env="production" ;;
+      *) var_plaid_env="sandbox" ;;
+    esac
+  fi
+  cat <<EOF >/opt/pennyhelm/.env
+PLAID_CLIENT_ID=${var_plaid_client_id}
+PLAID_SECRET=${var_plaid_secret}
+PLAID_ENV=${var_plaid_env}
+EOF
+  msg_ok "Configured Plaid"
+fi
+
 msg_info "Creating Service"
 cat <<EOF >/etc/systemd/system/pennyhelm.service
 [Unit]
@@ -40,6 +69,7 @@ Type=simple
 User=root
 WorkingDirectory=/opt/pennyhelm
 Environment=PORT=8081
+EnvironmentFile=-/opt/pennyhelm/.env
 ExecStart=/usr/bin/npm start
 Restart=on-failure
 RestartSec=5
