@@ -19,7 +19,7 @@ msg_ok "Installed Dependencies"
 
 NODE_VERSION="22" setup_nodejs
 
-msg_info "Cloning ${APP}"
+msg_info "Cloning PennyHelm"
 $STD git clone --depth 1 https://github.com/administrativetrick/pennyhelm.git /opt/pennyhelm
 msg_ok "Cloned ${APP}"
 
