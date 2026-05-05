@@ -1,0 +1,45 @@
+{
+  "name": "Shelfarr",
+  "slug": "shelfarr",
+  "categories": [
+    6
+  ],
+  "date_created": "2026-05-04",
+  "type": "ct",
+  "updateable": true,
+  "privileged": false,
+  "interface_port": 5056,
+  "documentation": null,
+  "website": "https://github.com/Pedro-Revez-Silva/shelfarr",
+  "logo": "https://cdn.jsdelivr.net/gh/selfhst/icons@main/webp/shelfarr.webp",
+  "config_path": "/opt/shelfarr/.env",
+  "description": "Shelfarr is a self-hosted ebook and audiobook request and management system designed for the *arr ecosystem, enabling book discovery, acquisition, and library management in one unified platform.",
+  "install_methods": [
+    {
+      "type": "default",
+      "script": "ct/shelfarr.sh",
+      "config_path": "/opt/shelfarr/.env",
+      "resources": {
+        "cpu": 2,
+        "ram": 2048,
+        "hdd": 8,
+        "os": "Debian",
+        "version": "13"
+      }
+    }
+  ],
+  "default_credentials": {
+    "username": null,
+    "password": null
+  },
+  "notes": [
+    {
+      "text": "The first registered user automatically becomes the admin.",
+      "type": "info"
+    },
+    {
+      "text": "The initial build (bundle install + assets:precompile) may take several minutes — be patient.",
+      "type": "warning"
+    }
+  ]
+}
