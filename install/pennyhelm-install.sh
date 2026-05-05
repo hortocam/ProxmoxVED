@@ -29,14 +29,6 @@ $STD npm install --omit=dev
 mkdir -p /opt/pennyhelm/data
 msg_ok "Installed Node Modules"
 
-msg_info "Configuring PennyHelm"
-cat <<EOF >/opt/pennyhelm/.env
-PLAID_CLIENT_ID=${plaid_client_id}
-PLAID_SECRET=${plaid_secret}
-PLAID_ENV=${plaid_env}
-EOF
-msg_ok "Configured PennyHelm"
-
 msg_info "Creating Service"
 cat <<EOF >/etc/systemd/system/pennyhelm.service
 [Unit]
