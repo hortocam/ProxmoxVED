@@ -68,6 +68,7 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/opt/pennyhelm
+Environment=HOST=0.0.0.0
 Environment=PORT=8081
 EnvironmentFile=-/opt/pennyhelm/.env
 ExecStart=/usr/bin/npm start
