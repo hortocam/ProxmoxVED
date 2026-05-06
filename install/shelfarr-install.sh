@@ -98,7 +98,7 @@ Environment=HOME=/root
 Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=BUNDLE_GEMFILE=/opt/shelfarr/Gemfile
 Environment=BUNDLE_WITHOUT=development:test
-ExecStart=/opt/shelfarr/bin/bundle exec puma -C /opt/shelfarr/config/puma.rb
+ExecStart=/opt/shelfarr/bin/bundle exec puma -C /opt/shelfarr/config/puma.rb -b tcp://0.0.0.0:5056
 Restart=on-failure
 RestartSec=5
 
