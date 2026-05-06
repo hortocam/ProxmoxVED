@@ -18,20 +18,26 @@ $STD apt install -y \
   build-essential \
   git \
   curl \
-  libsqlite3-dev \
-  libvips42 \
-  libvips-dev \
   libyaml-dev \
   libssl-dev \
   zlib1g-dev \
   libreadline-dev \
-  libffi-dev \
-  libxml2-dev \
-  libxslt1-dev \
-  poppler-utils
+  libffi-dev
 msg_ok "Installed Dependencies"
 
-RUBY_VERSION="3.3.6" RUBY_INSTALL_RAILS="false" setup_ruby
+msg_info "Installing Library Dependencies"
+$STD apt install -y \
+  libsqlite3-dev \
+  libvips42 \
+  libvips-dev \
+  libxml2-dev \
+  libxslt1-dev
+msg_ok "Installed Library Dependencies"
+
+msg_info "Installing Ruby"
+$STD apt install -y ruby-full ruby-dev
+$STD gem install bundler --no-document
+msg_ok "Installed Ruby"
 
 msg_info "Cloning Shelfarr"
 $STD git clone --depth 1 https://github.com/Pedro-Revez-Silva/shelfarr.git /opt/shelfarr
@@ -66,8 +72,6 @@ msg_ok "Configured Shelfarr"
 
 msg_info "Building Application"
 cd /opt/shelfarr
-export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
-eval "$(rbenv init - bash)" 2>/dev/null || true
 export RAILS_ENV=production
 set -a
 source /opt/shelfarr/.env
@@ -91,7 +95,7 @@ User=root
 WorkingDirectory=/opt/shelfarr
 EnvironmentFile=/opt/shelfarr/.env
 Environment=HOME=/root
-Environment=PATH=/root/.rbenv/shims:/root/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=BUNDLE_GEMFILE=/opt/shelfarr/Gemfile
 Environment=BUNDLE_WITHOUT=development:test
 ExecStart=/opt/shelfarr/bin/bundle exec puma -C /opt/shelfarr/config/puma.rb

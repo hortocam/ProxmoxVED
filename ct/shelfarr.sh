@@ -36,8 +36,6 @@ function update_script() {
   msg_info "Updating ${APP}"
   cd /opt/shelfarr
   $STD git pull
-  export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
-  eval "$(rbenv init - bash)" 2>/dev/null || true
   set -a && source /opt/shelfarr/.env && set +a
   $STD bundle install -j"$(nproc)"
   $STD bundle exec rails assets:precompile
