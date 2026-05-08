@@ -76,11 +76,11 @@ export RAILS_ENV=production
 set -a
 source /opt/shelfarr/.env
 set +a
-$STD /usr/bin/bundle config set --local deployment 'true'
-$STD /usr/bin/bundle config set --local without 'development:test'
-$STD /usr/bin/bundle install -j"$(nproc)"
-$STD /usr/bin/bundle exec rails assets:precompile
-$STD /usr/bin/bundle exec rails db:prepare
+$STD /usr/local/bin/bundle config set --local deployment 'true'
+$STD /usr/local/bin/bundle config set --local without 'development:test'
+$STD /usr/local/bin/bundle install -j"$(nproc)"
+$STD /usr/local/bin/bundle exec rails assets:precompile
+$STD /usr/local/bin/bundle exec rails db:prepare
 msg_ok "Built Application"
 
 msg_info "Creating Service"
@@ -98,7 +98,7 @@ Environment=HOME=/root
 Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=BUNDLE_GEMFILE=/opt/shelfarr/Gemfile
 Environment=BUNDLE_WITHOUT=development:test
-ExecStart=/usr/bin/bundle exec puma -C /opt/shelfarr/config/puma.rb -b tcp://0.0.0.0:5056
+ExecStart=/usr/local/bin/bundle exec puma -C /opt/shelfarr/config/puma.rb -b tcp://0.0.0.0:5056
 Restart=on-failure
 RestartSec=5
 
